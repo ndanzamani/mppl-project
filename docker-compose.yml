@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: guildhall-rpg:latest
+    container_name: guildhall_app
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_URL: "http://localhost:8000"
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: guildhall
+      DB_USERNAME: guildhall_user
+      DB_PASSWORD: guildhall_password
+      CACHE_STORE: redis
+      REDIS_HOST: redis
+    depends_on:
+      - db
+      - redis
+    networks:
+      - guildhall-network
+
+  db:
+    image: mysql:8.0
+    container_name: guildhall_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: guildhall
+      MYSQL_USER: guildhall_user
+      MYSQL_PASSWORD: guildhall_password
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - guildhall-network
+
+  redis:
+    image: redis:7.0-alpine
+    container_name: guildhall_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - guildhall-network
+
+volumes:
+  mysql_data:
+
+networks:
+  guildhall-network:
+    driver: bridge

@@ -1,0 +1,103 @@
+@import 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 5 Theme System Tokens */
+:root, [data-theme="dark"] {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-card: #1e293b;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --accent-primary: #f59e0b;
+  --accent-secondary: #6366f1;
+  --border-color: #334155;
+  --shadow-glow: rgba(245, 158, 11, 0.15);
+}
+
+[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --accent-primary: #6366f1;
+  --accent-secondary: #3b82f6;
+  --border-color: #e2e8f0;
+  --shadow-glow: rgba(99, 102, 241, 0.15);
+}
+
+[data-theme="midnight"] {
+  --bg-primary: #0b0719;
+  --bg-secondary: #160f30;
+  --bg-card: #1d143d;
+  --text-primary: #f3f0ff;
+  --text-secondary: #a799e8;
+  --accent-primary: #a855f7;
+  --accent-secondary: #c084fc;
+  --border-color: #2e2259;
+  --shadow-glow: rgba(168, 85, 247, 0.2);
+}
+
+[data-theme="forest"] {
+  --bg-primary: #061a14;
+  --bg-secondary: #0b2920;
+  --bg-card: #10382c;
+  --text-primary: #ecfdf5;
+  --text-secondary: #6ee7b7;
+  --accent-primary: #10b981;
+  --accent-secondary: #34d399;
+  --border-color: #1b4d3e;
+  --shadow-glow: rgba(16, 185, 129, 0.2);
+}
+
+[data-theme="sunset"] {
+  --bg-primary: #1a0c16;
+  --bg-secondary: #2d1224;
+  --bg-card: #3d1931;
+  --text-primary: #fff1f2;
+  --text-secondary: #fda4af;
+  --accent-primary: #f43f5e;
+  --accent-secondary: #fb7185;
+  --border-color: #522243;
+  --shadow-glow: rgba(244, 63, 94, 0.2);
+}
+
+@layer base {
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    @apply font-sans transition-colors duration-300;
+  }
+}
+
+/* Accessibility & Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.3);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.6);
+}
